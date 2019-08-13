@@ -6,8 +6,8 @@ from flask import Flask
 if __name__ == "__main__":
 
     app = Flask("example")
-    port = 8001
-    host = "localhost"
+    port = 5000
+    host = "127.0.0.1"
     hidden_svc_dir = "c:/temp/"
 
     @app.route('/')
