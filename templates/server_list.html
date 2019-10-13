@@ -1,0 +1,21 @@
+<table class="table table-hover">
+    <tbody>
+        {% if response.error %}
+            <h1>Something went wrong ! {{ server_details.error }}</h1>
+        {% else %}
+        {% for server in server_list %}
+            {% if server %}
+            <tr>
+                <td>#1</td>
+                <td>{{ server.country_long }}</td>
+                <td>{{ server.host_name }}<br/>{{ server.ip }}</td>
+                <td>{{ server.sessions }}<br/>{{ server.uptime }}<br/>{{ server.total_users }}</td>
+                <td>{{ server.speed }}<br/>{{ server.ping }}<br/>{{ server.total_traffic }}</td>
+                <td>{{ server.operator }}</td>
+                <td>{{ server.score }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
