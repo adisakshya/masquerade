@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request
 import requests
 import os
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -17,17 +18,38 @@ def config_list():
         'error' : True,
         'success' : False
     }
-    
+
+    connection_list = {}
     try:
-        list_config_files = os.listdir("C:\\Program Files\\OpenVPN\\config")
-        res['error'] = False
-        res['succss'] = True
+        df = pd.read_csv('./bin/connection_list.csv', index_col=0)
+        for index, row in df.iterrows():
+            ip_address = row['ip_address']
+            organisation = row['organisation']
+            city = row['city']
+            country = row['country']
+            region = row['region']
+
+            if type(city) != str:
+                city = 'Unknown'
+            if type(region) != str:
+                region = 'Unknown'
+            
+            if country in connection_list.keys():
+                connection_list[country].append({
+                    'ip_address':ip_address,
+                    'organisation':organisation,
+                    'country':country,
+                    'city':city,
+                    'region':region
+                })
+            else:
+                connection_list[country] = []
     except FileNotFoundError:
-        res['error'] = 'No Config Files Available'
+        res['error'] = 'Connection List File Not Found !'
     except Exception as error:
         res['error'] = error
     
-    return { 'list' : list_config_files }
+    return { 'connection_list' : connection_list, "status" : res }
 
 #  Refresh list of available connections
 @app.route("/refresh", methods = ["GET"])

@@ -3,6 +3,7 @@ import re
 import base64
 import socket
 import os, glob
+import geoip
 
 class VPNServersList:
 
@@ -66,16 +67,6 @@ class VPNServersList:
                                         result[country].append({'ip':ip, 'config':config})
                                         self.server_details[ip] = {
                                             'host_name' : c[0],
-                                            'ip' : ip,
-                                            'score': c[2],
-                                            'ping': c[3],
-                                            'speed' : c[4],
-                                            'country_long' : c[5],
-                                            'country_short' : c[6],
-                                            'sessions' : c[7],
-                                            'uptime' : c[8],
-                                            'total_users' : c[9],
-                                            'total_traffic' : c[10],
                                             'operator' : c[12]
                                         }
                                 else :
@@ -89,6 +80,15 @@ class VPNServersList:
             for country in result :
                 for server in result[country] :
                     file_name = '_'.join(['vpngate', country, server['ip']]) + '.ovpn'
+
+                    try:
+                        os.chdir('./bin')
+                        obj = geoip.geoip(server['ip'])
+                        print(obj.update_connections())
+                        os.chdir(config_path)
+                    except Exception as error:
+                        print("Error")
+
                     print(file_name)
                     f = open(file_name, 'w')
                     f.write(server['config'])
@@ -106,5 +106,5 @@ class VPNServersList:
         return self.server_details, error, success
 
 # Uncomment to test above class functions
-# obj = VPNServersList()
-# obj.get_server_list()
+obj = VPNServersList()
+obj.get_server_list()
