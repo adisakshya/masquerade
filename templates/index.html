@@ -12,34 +12,62 @@
     
     <div id="app">
       <div data-reactid=".0">
-            <div class="row row-dashboard" data-reactid=".0.1">
-              <div class="col-md-3 connection-status" data-reactid=".0.1.0">
-                <div class="panel panel-danger" data-reactid=".0.1.0.0">
-                  <div class="panel-heading" data-reactid=".0.1.0.0.0">
-                    <h3 class="panel-title" data-reactid=".0.1.0.0.0.0">
-                      <span data-reactid=".0.1.0.0.0.0.0">Status: </span>
-                      <div id="connectionstatus"></div>
+            <div class="row row-dashboard">
+              <div class="col-md-3 connection-status">
+                <div class="panel panel-danger">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">
+                      <span>Status: <div id="connectionstatus"></div></span>
                     </h3>
                     </div>
-                    <div class="panel-body" data-reactid=".0.1.0.0.1">
-                        <table class="table" data-reactid=".0.1.0.0.1.0">
-                          <tbody data-reactid=".0.1.0.0.1.0.0">
-                            <tr class="status-country" data-reactid=".0.1.0.0.1.0.0.0">
-                              <th data-reactid=".0.1.0.0.1.0.0.0.0">Country:</th>
-                              <td data-reactid=".0.1.0.0.1.0.0.0.1">
-                                <span data-reactid=".0.1.0.0.1.0.0.0.1.0">-</span>
-                                <span data-reactid=".0.1.0.0.1.0.0.0.1.1"></span>
+                    <div class="panel-body">
+                        <table class="table">
+                          <tbody>
+                            <tr class="status-country">
+                              <th>Country:</th>
+                              <td>
+                                <span>-</span>
+                                <span></span>
                               </td>
                             </tr>
-                            <tr class="status-host" data-reactid=".0.1.0.0.1.0.0.1"><th data-reactid=".0.1.0.0.1.0.0.1.0">Host Name:</th><td data-reactid=".0.1.0.0.1.0.0.1.1">-</td></tr><tr class="status-ip" data-reactid=".0.1.0.0.1.0.0.2"><th data-reactid=".0.1.0.0.1.0.0.2.0">IP:</th><td data-reactid=".0.1.0.0.1.0.0.2.1">-</td></tr><tr class="status-throughput" data-reactid=".0.1.0.0.1.0.0.3"><th data-reactid=".0.1.0.0.1.0.0.3.0">Throughput:</th><td data-reactid=".0.1.0.0.1.0.0.3.1">-</td></tr><tr class="status-ping" data-reactid=".0.1.0.0.1.0.0.4"><th data-reactid=".0.1.0.0.1.0.0.4.0">Ping:</th><td data-reactid=".0.1.0.0.1.0.0.4.1">-</td></tr><tr class="status-operator" data-reactid=".0.1.0.0.1.0.0.5"><th data-reactid=".0.1.0.0.1.0.0.5.0">Operator:</th><td data-reactid=".0.1.0.0.1.0.0.5.1">-</td></tr><tr class="status-logtype" data-reactid=".0.1.0.0.1.0.0.6"><th data-reactid=".0.1.0.0.1.0.0.6.0">Logging policy:</th><td data-reactid=".0.1.0.0.1.0.0.6.1">-</td></tr><tr class="status-score" data-reactid=".0.1.0.0.1.0.0.7"><th data-reactid=".0.1.0.0.1.0.0.7.0">Score:</th><td data-reactid=".0.1.0.0.1.0.0.7.1">NaN</td></tr><tr class="status-traffic" data-reactid=".0.1.0.0.1.0.0.8"><th data-reactid=".0.1.0.0.1.0.0.8.0">Cumulative transfers:</th><td data-reactid=".0.1.0.0.1.0.0.8.1">-</td></tr><tr class="status-uptime" data-reactid=".0.1.0.0.1.0.0.9"><th data-reactid=".0.1.0.0.1.0.0.9.0">Uptime:</th><td data-reactid=".0.1.0.0.1.0.0.9.1">-</td></tr><tr class="status-users" data-reactid=".0.1.0.0.1.0.0.a"><th data-reactid=".0.1.0.0.1.0.0.a.0">Cumulative users:</th><td data-reactid=".0.1.0.0.1.0.0.a.1">NaN</td></tr></tbody></table>
-                          </div>
-                        </div>
-                      </div>
+                            <tr class="status-ipaddress">
+                                <th>IP Address:</th>
+                                <td>
+                                  <span>-</span>
+                                  <span></span>
+                                </td>
+                              </tr>
+                              <tr class="status-ipaddress">
+                                <th>City:</th>
+                                <td>
+                                  <span>-</span>
+                                  <span></span>
+                                </td>
+                              </tr>
+                              <tr class="status-ipaddress">
+                                <th>Region:</th>
+                                <td>
+                                  <span>-</span>
+                                  <span></span>
+                                </td>
+                              </tr>
+                              <tr class="status-ipaddress">
+                                  <th>Operator</th>
+                                  <td>
+                                    <span>-</span>
+                                    <span></span>
+                                  </td>
+                              </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>
                       
-                      <div id="available-connection-list"></div>
-                    </div>
-                    </div>
-                    </div>
+              <div id="available-connection-list"></div>
+            </div>
+        </div>
+      </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
