@@ -60,10 +60,10 @@
         //   }
         // });
         $.ajax({
-          url: "/config_list/KR",
+          url: "/config_list/all",
           type: "get",
           success: function(response) {
-            console.log(response);
+            console.log('called config for all');
             $("#available-connection-list").html(response);
           },
           error: function(xhr) {

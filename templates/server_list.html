@@ -6,14 +6,14 @@
             {% else %}
             <h4>No available connection</h4>
             {% endif %}
-        <!-- <select class="form-control input-sm" id="select-country">
-          <option value="0" >-- All Countries --</option>
-          {% if countries_list %}
+        <select class="form-control input-sm" id="select-country">
+          <option value="all" >-- All Countries --</option>
+          {% if country_list %}
           {% for country in country_list %}
-          <option value="0" >{{ country.name }}</option>
+            <option value="{{ country }}" >{{ country }}</option>
           {% endfor %}
           {% endif %}
-        </select> -->
+        </select>
           <button id="refresh-button" type="button" class="btn btn-sm btn-primary" title="Update vpngate.net configs">
             {% if refresh_flag %}
             Refresh Connection List
@@ -26,7 +26,6 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>#</th>
               <th>
                 <span>Country</span>
               </th>
@@ -55,7 +54,6 @@
                     {% for country_name in server_list %}
                         {% for config in server_list[country_name] %}
                         <tr>
-                            <td>#{{ loop.index }}</td>
                             <td>{{ config.country }}</td>
                             <td>{{ config.ip_address }}</td>
                             <td>{{ config.organisation }}</td>
@@ -70,3 +68,22 @@
         </div>
       </div>
     </div>
+
+<script>
+  $("#select-country").on("change",function() {
+        let country_name = $("#select-country").val();
+        $.ajax({
+          url: "/config_list/"+country_name,
+          type: "get",
+          success: function(response) {
+            console.log('called config for ' + country_name);
+            $("#select-country").val(country_name);
+            $("#available-connection-list").html(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+            console.log("error: ", xhr);
+          }
+        });        
+      });
+</script>

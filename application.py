@@ -20,16 +20,18 @@ def config_list(country_code):
     }
 
     connection_list = {}
+    country_list = []
     try:
         df = pd.read_csv('./bin/connection_list.csv', index_col=0)
         for index, row in df.iterrows():
             
             country = row['country']
-            if country != country_code:
-                res['error'] = False
-                res['success'] = True
-                refresh_flag = False
-                return render_template('server_list.html', server_list = connection_list, response = res, refresh_flag = refresh_flag )
+            if country not in country_list:
+                country_list.append(country)
+            
+            if country_code != 'all':
+                if country != country_code:
+                    continue
 
             ip_address = row['ip_address']
             organisation = row['organisation']
@@ -41,17 +43,17 @@ def config_list(country_code):
             if type(region) != str:
                 region = 'Unknown'
             
-            if country in connection_list.keys():
-                connection_list[country].append({
+            if country not in connection_list.keys():
+                connection_list[country] = []
+            
+            connection_list[country].append({
                     'ip_address':ip_address,
                     'organisation':organisation,
                     'country':country,
                     'city':city,
                     'region':region
                 })
-            else:
-                connection_list[country] = []
-                
+
         res['error'] = False
         res['success'] = True
     except FileNotFoundError:
@@ -62,8 +64,9 @@ def config_list(country_code):
     refresh_flag = False
     if connection_list:
         refresh_flag = True
-        
-    return render_template('server_list.html', server_list = connection_list, response = res, refresh_flag = refresh_flag )
+    
+    print(connection_list)
+    return render_template('server_list.html', country_list = country_list, server_list = connection_list, response = res, refresh_flag = refresh_flag )
 
 #  Refresh list of available connections
 @app.route("/refresh", methods = ["GET"])
