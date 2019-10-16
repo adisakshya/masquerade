@@ -53,13 +53,13 @@
                     {% else %}
                     {% for country_name in server_list %}
                         {% for config in server_list[country_name] %}
-                        <tr>
-                            <td>{{ config.country }}</td>
-                            <td>{{ config.ip_address }}</td>
-                            <td>{{ config.organisation }}</td>
-                            <td>{{ config.city }}</td>
-                            <td>{{ config.region }}</td>
-                        </tr>
+                            <tr class='clickable-row' data-href='/activate_config/{{ config.ip_address }}/{{ config.country }}'>
+                                <td>{{ config.country }}</td>
+                                <td>{{ config.ip_address }}</td>
+                                <td>{{ config.organisation }}</td>
+                                <td>{{ config.city }}</td>
+                                <td>{{ config.region }}</td>
+                            </tr>
                         {% endfor %}
                     {% endfor %}
                     {% endif %}
@@ -70,6 +70,14 @@
     </div>
 
 <script>
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                console.log('clicked');
+                window.location = $(this).data("href");
+                console.log(window.location);
+            });
+        });
+        
         $('#refresh-button').on('click', function () {
           $.ajax({
             url: "/refresh",

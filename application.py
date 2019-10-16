@@ -64,8 +64,7 @@ def config_list(country_code):
     refresh_flag = False
     if connection_list:
         refresh_flag = True
-    
-    print(connection_list)
+        
     return render_template('server_list.html', country_list = country_list, server_list = connection_list, response = res, refresh_flag = refresh_flag )
 
 #  Refresh list of available connections
@@ -131,7 +130,43 @@ def stealth_mode_randomize():
         res['success'] = True
     except Exception as error:
         res['error'] = error
-    print(res)
+        
+    return render_template('connected.html', status=res)
+
+# Activate Config
+@app.route("/activate_config/<ip_address>/<country>", methods = ["GET","POST"])
+def activate_config(ip_address, country):
+    
+    res = {
+        'error' : True,
+        'success' : False
+    }
+    
+    try:
+        dis_command = '"C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe" --command disconnect_all'
+        os.system(dis_command)
+    except Exception as error:
+        pass
+
+    try:
+        list_config_files = os.listdir("C:\\Program Files\\OpenVPN\\config")
+        config_connect = ''
+        for filename in list_config_files:
+            if ip_address in filename and country in filename:
+                config_connect = filename
+        
+        if not config_connect:
+            res['error'] = 'Config File Not Found !'
+            return render_template('connected.html', status=res)
+
+        command = '"C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe" --connect ' + config_connect
+        os.system(command)
+        
+        res['error'] = False
+        res['success'] = True
+    except Exception as error:
+        res['error'] = error
+        
     return render_template('connected.html', status=res)
 
 if __name__ == "__main__":

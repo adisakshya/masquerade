@@ -1,6 +1,6 @@
 <div>
     {% if status.error %}
-        <span>Disconnected - status.error</span>
+        <span>Disconnected - {{ status.error }}</span>
     {% else %}
         <span>Connected</span>
     {% endif %}
