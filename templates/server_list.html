@@ -70,7 +70,23 @@
     </div>
 
 <script>
-  $("#select-country").on("change",function() {
+        $('#refresh-button').on('click', function () {
+          $.ajax({
+            url: "/refresh",
+            type: "get",
+            success: function(response) {
+              console.log(response);
+              $("#available-connection-list").html(response);
+              alert('Please restart the application for changes to take effect !')
+            },
+            error: function(xhr) {
+              //Do Something to handle error
+              console.log("error: ", xhr);
+            }
+          });
+        });
+        
+        $("#select-country").on("change",function() {
         let country_name = $("#select-country").val();
         $.ajax({
           url: "/config_list/"+country_name,

@@ -47,18 +47,6 @@
 <!-- <script src="{{ url_for('static', filename='js/server_list.js') }}"></script> -->
 <script>
     $(document).ready(function(){
-        // $.ajax({
-        //   url: "/refresh",
-        //   type: "get",
-        //   success: function(response) {
-        //     console.log(response);
-        //     $("#available-connection-list").html(response);
-        //   },
-        //   error: function(xhr) {
-        //     //Do Something to handle error
-        //     console.log("error: ", xhr);
-        //   }
-        // });
         $.ajax({
           url: "/config_list/all",
           type: "get",

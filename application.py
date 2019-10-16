@@ -59,7 +59,7 @@ def config_list(country_code):
     except FileNotFoundError:
         res['error'] = 'Connection List File Not Found !'
     except Exception as error:
-        res['error'] = error
+        res['error'] = 'Please Restart the Application'
     
     refresh_flag = False
     if connection_list:
@@ -94,7 +94,7 @@ def refresh():
         res['error'] = err
     except Exception as error:
         # error = 'Cannot fetch server list at the moment. Please try again later !'
-        res['error'] = error
+        res['error'] = 'Please Restart the Application'
 
     server_list = []
     for server in server_dict.keys():

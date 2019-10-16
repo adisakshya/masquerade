@@ -3,7 +3,7 @@ import re
 import base64
 import socket
 import os, glob
-import geoip
+from bin.geoip import geoip
 
 class VPNServersList:
 
@@ -73,21 +73,23 @@ class VPNServersList:
                                     print("TIMEOUT: ", country, ip, port)
                 else :
                     break
+            
 
             config_path = './config_files'
             os.chdir(config_path)
-            
+            print(os.getcwd())
             for country in result :
                 for server in result[country] :
                     file_name = '_'.join(['vpngate', country, server['ip']]) + '.ovpn'
 
                     try:
-                        os.chdir('./bin')
-                        obj = geoip.geoip(server['ip'])
+                        os.chdir('../bin')
+                        obj = geoip(server['ip'])
                         print(obj.update_connections())
+                        config_path = '../config_files'
                         os.chdir(config_path)
                     except Exception as error:
-                        print("Error")
+                        print("Error", error)
 
                     print(file_name)
                     f = open(file_name, 'w')
