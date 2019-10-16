@@ -27,28 +27,21 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Country</th>
               <th>
-                <span>DDNS Host Name</span>
-                <br>
+                <span>Country</span>
+              </th>
+              <th>
                 <span>IP Address</span>
               </th>
               <th>
-                <span>VPN Sessions</span>
-                <br>
-                <span>Uptime</span>
-                <br>
-                <span>Cumulative users</span>
+                <span>Organisation</span>
               </th>
               <th>
-                <span>Line quality</span>
-                <br>
-                <span>Throughput and Ping</span>
-                <br>
-                <span>Cumulative transfers</span>
+                <span>City</span>
               </th>
-              <th>Operator</th>
-              <th>Score</th>
+              <th>
+                <span>Region</span>
+              </th>
             </tr>
           </thead>
         </table>
@@ -59,18 +52,17 @@
                     {% if response.error %}
                         <h1>Something went wrong ! {{ response.error }}</h1>
                     {% else %}
-                    {% for server in server_list %}
-                        {% if server %}
+                    {% for country_name in server_list %}
+                        {% for config in server_list[country_name] %}
                         <tr>
-                            <td>#1</td>
-                            <td>{{ server.country_long }}</td>
-                            <td>{{ server.host_name }}<br/>{{ server.ip }}</td>
-                            <td>{{ server.sessions }}<br/>{{ server.uptime }}<br/>{{ server.total_users }}</td>
-                            <td>{{ server.speed }}<br/>{{ server.ping }}<br/>{{ server.total_traffic }}</td>
-                            <td>{{ server.operator }}</td>
-                            <td>{{ server.score }}</td>
+                            <td>#{{ loop.index }}</td>
+                            <td>{{ config.country }}</td>
+                            <td>{{ config.ip_address }}</td>
+                            <td>{{ config.organisation }}</td>
+                            <td>{{ config.city }}</td>
+                            <td>{{ config.region }}</td>
                         </tr>
-                        {% endif %}
+                        {% endfor %}
                     {% endfor %}
                     {% endif %}
                 </tbody>

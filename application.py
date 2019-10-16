@@ -11,8 +11,8 @@ def index():
     return render_template("index.html")
 
 # Get the list of configuration files
-@app.route("/config_list", methods = ["GET"])
-def config_list():
+@app.route("/config_list/<country_code>", methods = ["GET"])
+def config_list(country_code):
 
     res = {
         'error' : True,
@@ -23,10 +23,17 @@ def config_list():
     try:
         df = pd.read_csv('./bin/connection_list.csv', index_col=0)
         for index, row in df.iterrows():
+            
+            country = row['country']
+            if country != country_code:
+                res['error'] = False
+                res['success'] = True
+                refresh_flag = False
+                return render_template('server_list.html', server_list = connection_list, response = res, refresh_flag = refresh_flag )
+
             ip_address = row['ip_address']
             organisation = row['organisation']
             city = row['city']
-            country = row['country']
             region = row['region']
 
             if type(city) != str:
@@ -44,12 +51,19 @@ def config_list():
                 })
             else:
                 connection_list[country] = []
+                
+        res['error'] = False
+        res['success'] = True
     except FileNotFoundError:
         res['error'] = 'Connection List File Not Found !'
     except Exception as error:
         res['error'] = error
     
-    return { 'connection_list' : connection_list, "status" : res }
+    refresh_flag = False
+    if connection_list:
+        refresh_flag = True
+        
+    return render_template('server_list.html', server_list = connection_list, response = res, refresh_flag = refresh_flag )
 
 #  Refresh list of available connections
 @app.route("/refresh", methods = ["GET"])
