@@ -1,7 +1,9 @@
 from flask import Flask,render_template,request
 import requests
 import os
+import subprocess
 import pandas as pd
+from util import *
 
 app = Flask(__name__)
 
@@ -126,12 +128,15 @@ def stealth_mode_randomize():
         command = '"C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe" --connect ' + config_connect
         os.system(command)
 
+        update_config = get_config_file_details(config_connect)
+        update_current_connection(update_config)
+
         res['error'] = False
         res['success'] = True
     except Exception as error:
         res['error'] = error
         
-    return render_template('connected.html', status=res)
+    return render_template('connected.html', status=res, connection_details = update_config)
 
 # Activate Config
 @app.route("/activate_config/<ip_address>/<country>", methods = ["GET","POST"])
@@ -159,15 +164,20 @@ def activate_config(ip_address, country):
             res['error'] = 'Config File Not Found !'
             return render_template('connected.html', status=res)
 
-        command = '"C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe" --connect ' + config_connect
-        os.system(command)
-        
-        res['error'] = False
-        res['success'] = True
+        command = "C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe" 
+        subprocess.Popen([command, '--connect', config_connect], shell=True)
+
+        update_config = get_config_file_details(config_connect)
+        flag = update_current_connection(update_config)
+
+        if flag:
+            res['error'] = False
+            res['success'] = True
     except Exception as error:
         res['error'] = error
-        
-    return render_template('connected.html', status=res)
+
+    print("CONN: ", update_config)
+    return render_template('connected.html', status=res, connection_details = update_config)
 
 if __name__ == "__main__":
     app.run(debug = True)
