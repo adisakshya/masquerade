@@ -162,7 +162,7 @@ def activate_config(ip_address, country):
         
         if not config_connect:
             res['error'] = 'Config File Not Found !'
-            return render_template('connected.html', status=res)
+            return render_template('connected.html', status=res, connection_details = update_config)
 
         command = "C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe" 
         subprocess.Popen([command, '--connect', config_connect], shell=True)
