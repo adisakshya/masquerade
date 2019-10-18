@@ -125,17 +125,18 @@ def stealth_mode_randomize():
         import random
         list_config_files = os.listdir("C:\\Program Files\\OpenVPN\\config")
         config_connect = random.choice(list_config_files)
-        command = '"C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe" --connect ' + config_connect
-        os.system(command)
+        command = "C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe" 
+        subprocess.Popen([command, '--connect', config_connect], shell=True)
 
         update_config = get_config_file_details(config_connect)
-        update_current_connection(update_config)
+        flag = update_current_connection(update_config)
 
-        res['error'] = False
-        res['success'] = True
+        if flag:
+            res['error'] = False
+            res['success'] = True
     except Exception as error:
         res['error'] = error
-        
+
     return render_template('connected.html', status=res, connection_details = update_config)
 
 # Activate Config
@@ -176,7 +177,6 @@ def activate_config(ip_address, country):
     except Exception as error:
         res['error'] = error
 
-    print("CONN: ", update_config)
     return render_template('connected.html', status=res, connection_details = update_config)
 
 if __name__ == "__main__":

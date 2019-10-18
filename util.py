@@ -19,11 +19,11 @@ def get_config_file_details(filename):
         
         if len(row.index):
             connection_details = {
-                'ip_address' : row['ip_address'][0],
-                'country' : row['country'][0],
-                'city' : row['city'][0],
-                'region' : row['region'][0],
-                'operator' : row['organisation'][0]
+                'ip_address' : row['ip_address'][row.index[0]],
+                'country' : row['country'][row.index[0]],
+                'city' : row['city'][row.index[0]],
+                'region' : row['region'][row.index[0]],
+                'operator' : row['organisation'][row.index[0]]
             }
 
     except Exception as error:

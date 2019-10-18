@@ -13,7 +13,7 @@
     <div id="app">
       <div>
             <div class="row row-dashboard">
-              <div class="col-md-3 connection-status" id="connection_status">
+              <div class="col-md-3 connection-status" id="connectionstatus">
                 
               </div>
                       
@@ -40,12 +40,8 @@
             console.log("error: ", xhr);
           }
         });
-    });
 
-    function Switching() {
-          
-          console.log("Switching");
-          $.ajax({
+        $.ajax({
           url: "/stealth_mode_randomize",
           type: "get",
           success: function(response) {
@@ -56,10 +52,8 @@
             //Do Something to handle error
             console.log("error: ", xhr);
           }
-          })
-        };
-
-    // Switching();
+        });
+    });
 </script>
 </body>
 </html>
