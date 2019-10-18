@@ -154,6 +154,7 @@ def activate_config(ip_address, country):
     except Exception as error:
         pass
 
+    update_config = {}
     try:
         list_config_files = os.listdir("C:\\Program Files\\OpenVPN\\config")
         config_connect = ''

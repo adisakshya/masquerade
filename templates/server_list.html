@@ -53,7 +53,7 @@
                     {% else %}
                     {% for country_name in server_list %}
                         {% for config in server_list[country_name] %}
-                            <tr class='clickable-row' data-href='/activate_config/{{ config.ip_address }}/{{ config.country }}'>
+                            <tr class='clickable-row' onclick="activate_config('{{ config.ip_address }}', '{{ config.country }}')">
                                 <td>{{ config.country }}</td>
                                 <td>{{ config.ip_address }}</td>
                                 <td>{{ config.organisation }}</td>
@@ -70,13 +70,20 @@
     </div>
 
 <script>
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
-                console.log('clicked');
-                window.location = $(this).data("href");
-                console.log(window.location);
-            });
-        });
+        function activate_config(ip_address, country) {
+          $.ajax({
+            url: "/activate_config/" + ip_address + '/' + country,
+            type: "get",
+            success: function(response) {
+              console.log(response);
+              $("#connectionstatus").html(response);
+            },
+            error: function(xhr) {
+              //Do Something to handle error
+              console.log("error: ", xhr);
+            }
+          });
+        }
         
         $('#refresh-button').on('click', function () {
           $.ajax({
