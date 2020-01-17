@@ -9,13 +9,7 @@ In production this image should be run first (before connecting to tor-proxy-ser
     docker-compose build
     ```
 
-- Run the image using following command:
+- Run the image using following command to connect to VPN Server using the OpenVPN configuration file.:
     ```
-    docker-compose-up
+    docker-compose up vpn <open-vpn-config-file>
     ```
-
-- Follow the instructions in ```start.sh``` to create client configuration file to connect to VPN Server using OpenVPN Client.
-
-- Download OpenVPN Client.
-
-- Connect to VPN Server using the generated configuration file.
