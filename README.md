@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/adisakshya/masquerade">
-    <img src="https://images-na.ssl-images-amazon.com/images/I/61MjBdX3-DL._SX355_.jpg" height="300" alt="Masquerade">
+    <img src="https://raw.githubusercontent.com/adisakshya/masquerade/master/readme-assets/logo.png?token=AKXRM5VKIVTXM7VGUY6DPUC6GSARC" height="300" alt="Masquerade">
   </a>
 </p>
 
