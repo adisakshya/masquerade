@@ -1,15 +1,15 @@
 <p align="center">
-  <a href="https://github.com/adisakshya/JustShareIt">
+  <a href="https://github.com/adisakshya/masquerade">
     <img src="https://images-na.ssl-images-amazon.com/images/I/61MjBdX3-DL._SX355_.jpg" height="300" alt="Masquerade">
   </a>
 </p>
 
-[![release](https://img.shields.io/badge/release-1.0-green.svg)](https://github.com/adisakshya/JustShareIt/releases)
+[![release](https://img.shields.io/badge/release-1.0-green.svg)](https://github.com/adisakshya/masquerade/releases)
 [![maintenance](https://img.shields.io/badge/maintained%3F-yes-green.svg)]()
-[![dockerized](https://img.shields.io/badge/dockerized-yes-green.svg)](https://github.com/adisakshya/JustShareIt/blob/master/docker-compose.yml)
+[![dockerized](https://img.shields.io/badge/dockerized-yes-green.svg)](https://github.com/adisakshya/masquerade/blob/master/docker-compose.yml)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/adisakshya/masquerade/blob/master/LICENSE)
-[![Website](https://img.shields.io/badge/website-down-red.svg)](https://adisakshya.github.io/JustShareIt)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/adisakshya/JustShareIt/pulls)
+[![Website](https://img.shields.io/badge/website-down-red.svg)](https://adisakshya.github.io/masquerade)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/adisakshya/masquerade/pulls)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)]()
 
 ---
