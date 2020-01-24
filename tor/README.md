@@ -1,6 +1,12 @@
 # TOR PROXY SERVER ON DOCKER
 
-In production this image should be run after establishing connection with the VPN server.
+This is a **TOR PROXY** in a docker container.
+
+EXPOSED PORT: 9150
+
+# Instruction of use
+
+This proxy will be used by the chrome/chromium browser running inside another docker container, in presence of an established VPN connection.
 
 ## Testing the image
 
