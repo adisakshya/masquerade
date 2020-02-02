@@ -1,13 +1,20 @@
 # Dockerfile
 
-FROM alpine:edge
+FROM alpine:latest
 
-RUN apk update
-RUN apk add tor
+RUN apk --no-cache add \
+	tor
 
-RUN echo "Log notice stdout" >> /etc/torrc
-RUN echo "SocksPort 0.0.0.0:9150" >> /etc/torrc
+# expose socks port
+EXPOSE 9050
 
-EXPOSE 9150
+# copy in our torrc file
+COPY torrc.default /etc/tor/torrc.default
 
-CMD tor -f /etc/torrc
+# make sure files are owned by tor user
+RUN chown -R tor /etc/tor
+
+USER tor
+
+ENTRYPOINT [ "tor" ]
+CMD [ "-f", "/etc/tor/torrc.default" ]

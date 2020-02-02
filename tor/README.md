@@ -17,7 +17,7 @@ This proxy will be used by the chrome/chromium browser running inside another do
 
 - Run the image using following command:
     ```
-    docker run -d --rm tor -p 9150:9150 tor
+    docker run -d --restart always -p 9050:9050 --name torproxy tor
     ```
 
 - Open Google Chrome or any browser you are using and download [SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=en) or any other tool to manage proxy for your browser.
@@ -29,3 +29,7 @@ This proxy will be used by the chrome/chromium browser running inside another do
 
 - Check if the tor proxy server is functioning good by visiting this [check.torproject](https://check.torproject.org/)
     - Look for the congratulations message and the IP assigned.
+
+# Credits
+
+This service is credited to [jessfraz](https://github.com/jessfraz/dockerfiles/tree/master/tor-proxy).
