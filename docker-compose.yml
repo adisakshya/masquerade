@@ -1,0 +1,19 @@
+
+version: "3"
+
+services:
+
+  torproxy:
+    build: ./tor
+    container_name: masquerade-torproxy
+    ports:
+      - '9050:9050'
+
+  firefox:
+    image: jlesage/firefox:latest
+    container_name: masquerade-firefox
+    ports:
+      - "5800:5800"
+    shm_size: 2g
+    links:
+      - torproxy
